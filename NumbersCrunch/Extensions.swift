@@ -9,6 +9,8 @@
 import Foundation
 
 extension Dictionary {
+	
+	// Loads a JSON file from the app bundle into a new dictionary
 	static func loadJSONFromBundle(filename: String) -> Dictionary<String, AnyObject>? {
 		if let path = NSBundle.mainBundle().pathForResource(filename, ofType: "json") {
 			
@@ -16,8 +18,7 @@ extension Dictionary {
 			let data: NSData? = NSData(contentsOfFile: path, options: NSDataReadingOptions(), error: &error)
 			if let data = data {
 				
-				let dictionary: AnyObject? = NSJSONSerialization.JSONObjectWithData(data,
-					options: NSJSONReadingOptions(), error: &error)
+				let dictionary: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: &error)
 				if let dictionary = dictionary as? Dictionary<String, AnyObject> {
 					return dictionary
 				} else {

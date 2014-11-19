@@ -54,11 +54,24 @@
                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="YZ6-2d-IWH">
+                                <rect key="frame" x="16" y="163" width="288" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" id="3Fg-LF-ZKK">
+                                <rect key="frame" x="33" y="494" width="255" height="72"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="Button">
+                                    <color key="titleColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="gameOverPanel" destination="YZ6-2d-IWH" id="a5q-fA-Idv"/>
                         <outlet property="movesLabel" destination="EZe-sD-5vc" id="fjs-ea-pvr"/>
                         <outlet property="scoreLabel" destination="ZxJ-jt-469" id="UoY-Wq-tIv"/>
                         <outlet property="targetLabel" destination="xgg-32-vHl" id="kL0-Bg-ZXo"/>
@@ -69,6 +82,9 @@
             <point key="canvasLocation" x="252" y="429"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Button" width="200" height="72"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

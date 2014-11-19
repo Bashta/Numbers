@@ -12,7 +12,6 @@ struct Array2D<T> {
 	private var array: Array<T?>
 	
 	init(columns: Int, rows: Int) {
-		
 		self.columns = columns
 		self.rows = rows
 		array = Array<T?>(count: rows*columns, repeatedValue: nil)

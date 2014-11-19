@@ -27,6 +27,7 @@
 		652AD6EE1A0D328900E8A25D /* Array2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AD6ED1A0D328900E8A25D /* Array2D.swift */; };
 		652AD6F01A0D32B000E8A25D /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AD6EF1A0D32B000E8A25D /* Set.swift */; };
 		652AD6F21A0D32F500E8A25D /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652AD6F11A0D32F500E8A25D /* Level.swift */; };
+		65867D9C1A1C66D900877C99 /* Grid.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 65867D9B1A1C66D900877C99 /* Grid.atlas */; };
 		65D251911A0D3A0D001AB769 /* Level_0.json in Resources */ = {isa = PBXBuildFile; fileRef = 65D2518C1A0D3A0D001AB769 /* Level_0.json */; };
 		65D251921A0D3A0D001AB769 /* Level_1.json in Resources */ = {isa = PBXBuildFile; fileRef = 65D2518D1A0D3A0D001AB769 /* Level_1.json */; };
 		65D251931A0D3A0D001AB769 /* Level_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 65D2518E1A0D3A0D001AB769 /* Level_2.json */; };
@@ -71,6 +72,7 @@
 		652AD6ED1A0D328900E8A25D /* Array2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array2D.swift; sourceTree = "<group>"; };
 		652AD6EF1A0D32B000E8A25D /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		652AD6F11A0D32F500E8A25D /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		65867D9B1A1C66D900877C99 /* Grid.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Grid.atlas; sourceTree = "<group>"; };
 		65D2518C1A0D3A0D001AB769 /* Level_0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_0.json; sourceTree = "<group>"; };
 		65D2518D1A0D3A0D001AB769 /* Level_1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_1.json; sourceTree = "<group>"; };
 		65D2518E1A0D3A0D001AB769 /* Level_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Level_2.json; sourceTree = "<group>"; };
@@ -135,7 +137,6 @@
 		652AD6C01A0D2BA300E8A25D /* NumbersCrunch */ = {
 			isa = PBXGroup;
 			children = (
-				652AD6E71A0D2E9D00E8A25D /* Sprites.atlas */,
 				652AD6C31A0D2BA400E8A25D /* AppDelegate.swift */,
 				652AD6ED1A0D328900E8A25D /* Array2D.swift */,
 				650F64221A15823C00D95985 /* Chain.swift */,
@@ -147,7 +148,6 @@
 				652AD6EF1A0D32B000E8A25D /* Set.swift */,
 				6524A8C21A141C5900D416D9 /* Swap.swift */,
 				65D251961A0D3A74001AB769 /* Tile.swift */,
-				652AD6E91A0D2F8B00E8A25D /* Images.xcassets */,
 				652AD6D01A0D2BA400E8A25D /* LaunchScreen.xib */,
 				652AD6CB1A0D2BA400E8A25D /* Main.storyboard */,
 				652AD6C11A0D2BA300E8A25D /* Supporting Files */,
@@ -158,6 +158,9 @@
 		652AD6C11A0D2BA300E8A25D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				652AD6E91A0D2F8B00E8A25D /* Images.xcassets */,
+				652AD6E71A0D2E9D00E8A25D /* Sprites.atlas */,
+				65867D9B1A1C66D900877C99 /* Grid.atlas */,
 				652AD6C21A0D2BA300E8A25D /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -276,6 +279,7 @@
 				652AD6D21A0D2BA400E8A25D /* LaunchScreen.xib in Resources */,
 				650F641D1A1564DC00D95985 /* Drip.wav in Resources */,
 				65D251951A0D3A0D001AB769 /* Level_4.json in Resources */,
+				65867D9C1A1C66D900877C99 /* Grid.atlas in Resources */,
 				650F641E1A1564DC00D95985 /* Error.wav in Resources */,
 				65D251931A0D3A0D001AB769 /* Level_2.json in Resources */,
 				650F64211A1564DC00D95985 /* Scrape.wav in Resources */,
