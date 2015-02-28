@@ -10,9 +10,12 @@ import UIKit
 import SpriteKit
 import AVFoundation
 
-class GameViewController: UIViewController {
-	// The scene draws the tiles and cookie sprites, and handles swipes.
-	var scene: GameScene!
+class GameViewController: UIViewController, GameSceneDelegate {
+	// The gameScene draws the tiles and cookie sprites, and handles swipes.
+	var gameScene: GameScene!
+	
+	//The menu scene draws the menu buttons
+	var menuScene: MenuScene!
 	
 	// The level contains the tiles, the cookies, and most of the gameplay logic.
 	// Needs to be ! because it's not set in init() but in viewDidLoad().
@@ -35,6 +38,7 @@ class GameViewController: UIViewController {
 		player.numberOfLoops = -1
 		return player
   }()
+	//MARK: -
 	
 	override func prefersStatusBarHidden() -> Bool {
 		return true
@@ -48,36 +52,14 @@ class GameViewController: UIViewController {
 		return Int(UIInterfaceOrientationMask.AllButUpsideDown.rawValue)
 	}
 	
+	//MARK: -
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		// Configure the view.
-		let skView = view as SKView
-		skView.multipleTouchEnabled = false
-		
-		// Create and configure the scene.
-		scene = GameScene(size: skView.bounds.size)
-		scene.scaleMode = .AspectFill
-		
-		// Load the level.
-		level = Level(filename: "Level_1")
-		scene.level = level
-		scene.addTiles()
-		scene.swipeHandler = handleSwipe
-		
-		// Hide the game over panel from the screen.
-		gameOverPanel.hidden = true
-		shuffleButton.hidden = true
-		
-		// Present the scene.
-		skView.presentScene(scene)
-		
-		// Load and start background music.
-		backgroundMusic.play()
-		
-		// Let's start the game!
-		beginGame()
-	}
+			    loadPlayScene()
+			    gameScene.gameSceneDelegate = self
+			}
 	
 	func beginGame() {
 		movesLeft = level.maximumMoves
@@ -86,7 +68,7 @@ class GameViewController: UIViewController {
 		
 		level.resetComboMultiplier()
 		
-		scene.animateBeginGame() {
+		gameScene.animateBeginGame() {
 			self.shuffleButton.hidden = false
 		}
 		
@@ -95,11 +77,11 @@ class GameViewController: UIViewController {
 	
 	func shuffle() {
 		// Delete the old cookie sprites, but not the tiles.
-		scene.removeAllCookieSprites()
+		gameScene.removeAllCookieSprites()
 		
 		// Fill up the level with new cookies, and create sprites for them.
 		let newCookies = level.shuffle()
-		scene.addSpritesForCookies(newCookies)
+		gameScene.addSpritesForCookies(newCookies)
 	}
 	
 	// This is the swipe handler. MyScene invokes this function whenever it
@@ -111,9 +93,9 @@ class GameViewController: UIViewController {
 		
 		if level.isPossibleSwap(swap) {
 			level.performSwap(swap)
-			scene.animateSwap(swap, completion: handleMatches)
+			gameScene.animateSwap(swap, completion: handleMatches)
 		} else {
-			scene.animateInvalidSwap(swap) {
+			gameScene.animateInvalidSwap(swap) {
 				self.view.userInteractionEnabled = true
 			}
 		}
@@ -133,7 +115,7 @@ class GameViewController: UIViewController {
 		}
 		
 		// First, remove any matches...
-		scene.animateMatchedCookies(chains) {
+		gameScene.animateMatchedCookies(chains) {
 			
 			// Add the new scores to the total.
 			for chain in chains {
@@ -143,11 +125,11 @@ class GameViewController: UIViewController {
 			
 			// ...then shift down any cookies that have a hole below them...
 			let columns = self.level.fillHoles()
-			self.scene.animateFallingCookies(columns) {
+			self.gameScene.animateFallingCookies(columns) {
 				
 				// ...and finally, add new cookies at the top.
 				let columns = self.level.topUpCookies()
-				self.scene.animateNewCookies(columns) {
+				self.gameScene.animateNewCookies(columns) {
 					
 					// Keep repeating this cycle until there are no more matches.
 					self.handleMatches()
@@ -184,21 +166,24 @@ class GameViewController: UIViewController {
 	
 	func showGameOver() {
 		gameOverPanel.hidden = false
-		scene.userInteractionEnabled = false
+		gameScene.userInteractionEnabled = false
 		shuffleButton.hidden = true
 		
-		scene.animateGameOver() {
+		gameScene.animateGameOver() {
 			self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "hideGameOver")
 			self.view.addGestureRecognizer(self.tapGestureRecognizer)
 		}
 	}
 	
 	func hideGameOver() {
-		view.removeGestureRecognizer(tapGestureRecognizer)
+		if tapGestureRecognizer != nil {
+		
+			view.removeGestureRecognizer(tapGestureRecognizer)
+		}
 		tapGestureRecognizer = nil
 		
 		gameOverPanel.hidden = true
-		scene.userInteractionEnabled = true
+		gameScene.userInteractionEnabled = true
 		
 		beginGame()
 	}
@@ -209,4 +194,68 @@ class GameViewController: UIViewController {
 		// Pressing the shuffle button costs a move.
 		decrementMoves()
 	}
+	
+	//MARK: Temporary prototyping
+	
+	func loadPlayScene() {
+		
+		// Configure the view.
+		let gameSKView = view as SKView
+		gameSKView.multipleTouchEnabled = false
+		
+		// Create and configure the gameScene.
+		gameScene = GameScene(size: gameSKView.bounds.size)
+		gameScene.scaleMode = .AspectFill
+		
+		// Load the level.
+		level = Level(filename: "Level_0")
+		gameScene.level = level
+		gameScene.addTiles()
+		gameScene.swipeHandler = handleSwipe;
+		
+		// Hide the game over panel from the screen.
+		gameOverPanel.hidden = true
+		shuffleButton.hidden = true
+		
+		// Present the gameScene.
+		gameSKView.presentScene(gameScene)
+		
+		// Load and start background music.
+		backgroundMusic.play()
+		
+		// Let's start the game!
+		beginGame()
+
+	}
+	
+	func loadMenuView() {
+		//Configure the view
+		let menuSKView = view as SKView
+		menuSKView.multipleTouchEnabled = false
+		
+		//Create and configure the menuScene.
+		menuScene = MenuScene(size: menuSKView.bounds.size)
+		menuScene.scaleMode = .AspectFill
+		
+		//Present the menu scene
+		menuSKView.presentScene(menuScene)
+	}
+	
+	//MARK: GameSceneDelegate methods
+	
+	func GameOver() {
+
+		loadMenuView()
+	}
 }
+
+
+
+
+
+
+
+
+
+
+

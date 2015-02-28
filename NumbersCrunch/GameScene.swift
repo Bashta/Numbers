@@ -8,6 +8,10 @@
 
 import SpriteKit
 
+protocol GameSceneDelegate {
+	func GameOver()
+}
+
 class GameScene: SKScene {
 	// This is marked as ! because it will not initially have a value, but pretty
 	// soon after the GameScene is created it will be given a Level object, and
@@ -28,6 +32,9 @@ class GameScene: SKScene {
 	let tilesLayer = SKNode()
 	let cropLayer = SKCropNode()
 	let maskLayer = SKNode()
+	
+	//Delegate Propertie
+	var gameSceneDelegate: GameSceneDelegate?
 	
 	// The column and row numbers of the cookie that the player first touched
 	// when he started his swipe movement. These are marked ? because they may
@@ -92,6 +99,9 @@ class GameScene: SKScene {
 		
 		// Pre-load the label font so prevent delays during game play.
 		SKLabelNode(fontNamed: "GillSans-BoldItalic")
+		
+		
+		self.gameSceneDelegate?.GameOver()
 	}
 	
 	func addSpritesForCookies(cookies: Set<Cookie>) {
@@ -464,15 +474,16 @@ class GameScene: SKScene {
 	}
 	
 	func animateGameOver(completion: () -> ()) {
-		let action = SKAction.moveBy(CGVector(dx: 0, dy: -size.height), duration: 0.3)
+		let action = SKAction.moveBy(CGVector(dx: 0, dy: -size.height), duration: 0.7)
 		action.timingMode = .EaseIn
 		gameLayer.runAction(action, completion: completion)
+
 	}
 	
 	func animateBeginGame(completion: () -> ()) {
 		gameLayer.hidden = false
 		gameLayer.position = CGPoint(x: 0, y: size.height)
-		let action = SKAction.moveBy(CGVector(dx: 0, dy: -size.height), duration: 0.3)
+		let action = SKAction.moveBy(CGVector(dx: 0, dy: -size.height), duration: 0.7)
 		action.timingMode = .EaseOut
 		gameLayer.runAction(action, completion: completion)
 	}
